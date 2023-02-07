@@ -65,7 +65,8 @@ builder.Services.AddCors(options =>
         builder =>
         {
             builder.WithOrigins("http://localhost:4200")
-            .WithMethods("GET", "POST", "PUT");
+            .WithMethods("GET", "POST", "PUT")
+            .WithHeaders("Content-Type", "Authorization");
         });
 });
 

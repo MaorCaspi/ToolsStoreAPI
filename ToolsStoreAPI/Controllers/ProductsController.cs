@@ -7,7 +7,7 @@ using ToolsStoreAPI.Models;
 namespace ToolsStoreAPI.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize, ApiController]
+    [Authorize,ApiController]
     public class ProductsController : ControllerBase
     {
         private readonly DataContext _context;
