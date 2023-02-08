@@ -5,6 +5,7 @@ namespace ToolsStoreAPI.Models
     public class UserDto
     {
         [Required]
+        [RegularExpression("[a-zA-Z0-9]+$", ErrorMessage = "The allowed characters are: A-Z a-z 0-9.")]
         public string Username { get; set; } = string.Empty;
 
         [Required]
