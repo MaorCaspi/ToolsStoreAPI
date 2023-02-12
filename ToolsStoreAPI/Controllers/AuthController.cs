@@ -67,6 +67,7 @@ namespace ToolsStoreAPI.Controllers
             }
 
             user.LastLogIn= DateTime.Now;
+            _context.SaveChanges();
 
             string token = _authService.CreateToken(user);
             return Ok("Bearer " + token);
