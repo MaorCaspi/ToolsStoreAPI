@@ -10,7 +10,17 @@ const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<ToolsStoreAPI.Data.DataContext>(options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    });
+
+ToolsStoreAPI.Data.DataContext dbContext = builder.Services.BuildServiceProvider().GetRequiredService<ToolsStoreAPI.Data.DataContext>();
+if(dbContext == null || !dbContext.Database.CanConnect())
+{
+    Console.WriteLine("An error occurred while connecting to the database");
+    Environment.Exit(1);
+}   
 
 builder.Services.AddControllers();
 
@@ -52,11 +62,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
-
-builder.Services.AddDbContext<ToolsStoreAPI.Data.DataContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
 
 // Enable CORS
 builder.Services.AddCors(options =>
